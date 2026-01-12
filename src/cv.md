@@ -173,7 +173,7 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 
 ## Professional Experience [ph-briefcase]
 
-### Software Engineer / Team Lead [Jan 2023 – Present] | [Dedecta](https://dedecta.io)
+### Software Engineer / Team Lead [Jan 2023] | [Dedecta](https://dedecta.com)
 
 - Lead Rust development team building high-performance data processing systems
 - Architect scalable solutions using Rust, ClickHouse, and Redis
@@ -181,7 +181,7 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 - Implement efficient API services and system bindings
 - Contribute to system design and performance optimization initiatives
 
-### Co-Founder & CTO [Jul 2018 – Present] | [vida.events](https://vida.events)
+### Co-Founder & CTO [Jul 2018] | [vida.events](https://vida.events)
 
 - Co-founded and led technical direction of the company
 - Built distributed systems architecture using Go
@@ -203,13 +203,6 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 - Built scalable API services and microservices
 - Implemented distributed system solutions
 - Optimized performance and system reliability
-
-### Node.js Developer [Unknown – 2016] | [tombalalive.com](https://tombalalive.com)
-
-- Developed game server system bindings
-- Set up and configured servers for production
-- Built efficient API services for gaming platform
-- Implemented Unix tools for system administration
 
 ### Node.js Developer [Mar 2014 – Jul 2016] | [JADE COMMERCE INTERNATIONAL](https://jade-commerce.com)
 
