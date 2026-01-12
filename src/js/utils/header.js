@@ -210,7 +210,7 @@ function createDownloadSection() {
   downloadDiv.className = 'download-section'
 
   const downloadLink = document.createElement('a')
-  downloadLink.href = '/cv.pdf'
+  downloadLink.href = 'cv.pdf'
   downloadLink.className = 'download-link'
   downloadLink.textContent = 'Download PDF'
   downloadLink.target = '_blank'
