@@ -191,6 +191,10 @@ header {
         background-repeat: no-repeat;
       }
     }
+
+    @include print {
+      display: none;
+    }
   }
 
   @include md {
