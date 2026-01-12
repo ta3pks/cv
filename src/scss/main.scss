@@ -213,6 +213,10 @@ header {
         font-size: $print-scale-factor * $font-size-base;
       }
 
+      .phone-item {
+        grid-column: 1 / -1;
+      }
+
       i {
         @include print {
           margin-right: $print-scale-factor * 0.8 * $spacer;
@@ -267,6 +271,10 @@ header {
       grid-template-columns: 1fr 1fr;
       gap: $slightly-smaller * $spacer;
       font-size: $print-scale-factor * $font-size-base;
+
+      .phone-item {
+        grid-column: 1 / -1;
+      }
 
       i {
         margin-right: $print-scale-factor * 0.8 * $spacer;
