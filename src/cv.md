@@ -167,6 +167,63 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 
 **Technologies:** Rust, Tokio, ClickHouse, Redis, Poem, FFmpeg, OpenRouter AI, Gemini, Ansible, Serper API, RapidAPI, RSS, Cron
 
+### APRS Agent (Rust)
+
+Designed and implemented an extensible APRS-IS (Automatic Packet Reporting System) daemon with a plugin-based architecture for real-time packet processing and external service integration.
+
+- Core Architecture
+
+  - Built async daemon using Tokio runtime connecting to APRS-IS servers with automatic reconnection and exponential backoff
+  - Designed Trait-based plugin system (async-trait) enabling extensibility through clean abstractions
+  - Implemented ExtensionRegistry pattern managing multiple concurrent packet handlers
+  - Created TCP extension server (127.0.0.1:65080) for external client connections with real-time packet broadcasting
+  - Built TOML-based configuration system with CLI-based config generation and runtime validation
+
+- Built-in Extensions
+
+  - **Twitter Extension** (157 lines): Automated APRS-to-Twitter posting with configurable whitelists, optional hashtag appending (#APRS), and automatic ACK message generation using Twitter API v2
+  - **SMTP/Email Extension** (153 lines): Converts APRS messages to emails with SMTP authentication, sender/recipient whitelists, email validation, and automatic ACK responses using lettre library
+  - **Fixed Beacon Extension** (115 lines): Periodic position broadcasting with configurable coordinates and adjustable intervals (default 15 minutes) running as background worker
+  - **Logger Extension** (76 lines): Packet filtering and logging with keyword-based filtering and message type include/exclude configurations
+
+- Protocol Implementation
+
+  - Full APRS packet parsing using custom aprs-parser library
+  - APRS-IS authentication with passcode generation and validation
+  - Packet filtering by callsign prefix
+  - Position reporting in compressed/uncompressed formats
+  - Message acknowledgment support with path handling and Q-constructs
+
+- Production Deployment
+
+  - systemd service unit configuration for long-running daemon with auto-restart (3-second interval)
+  - Global singleton configuration pattern for runtime efficiency
+  - Comprehensive error handling using thiserror with structured error types
+  - Graceful degradation with error logging without crashes
+  - Credentials masking in debug output for security
+
+- Advanced Rust Features
+
+  - Async/await patterns with tokio::select! for handling multiple event sources
+  - Phantom types for compile-time type safety (Twitter extension)
+  - Custom derive macros (educe, serde, clap)
+  - Trait objects with Box<dyn Extension + Send + Sync> for dynamic dispatch
+  - Unsafe static storage for global config (performance trade-off)
+  - Custom macros (switch!, get_cmd!) for conditional registration and command parsing
+
+**Key Achievements:**
+
+- Designed extensible plugin architecture using async traits enabling dynamic packet handler registration
+- Implemented multiple service integrations (Twitter API v2, SMTP) with configurable security controls and whitelists
+- Built production-grade daemon with systemd integration handling long-running service requirements
+- Created TCP server for external client connectivity with real-time data broadcasting
+- Developed custom APRS parser library for complete protocol implementation
+- Achieved robust error handling with graceful degradation for network failures
+- Designed flexible configuration system supporting CLI-based config generation
+
+**Technologies:** Rust, Tokio, async-trait, serde, TOML, aprs-parser, callpass, lettre, twitter-v2, clap, parking_lot, thiserror, educe, tap, strum
+**Repository:** [github.com/ta3pks/aprs-agent](https://github.com/ta3pks/aprs-agent)
+
 ### Open Source Contributions
 
 - GitHub: [@ta3pks](https://github.com/ta3pks)
