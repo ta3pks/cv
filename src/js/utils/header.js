@@ -70,9 +70,11 @@ export function createHeaderFromFrontMatter(metadata) {
 
   const titleDiv = createTitleSection(metadata)
   const contactDiv = createContactSection(metadata)
+  const downloadDiv = createDownloadSection()
 
   header.appendChild(titleDiv)
   header.appendChild(contactDiv)
+  header.appendChild(downloadDiv)
 }
 
 /**
@@ -195,4 +197,24 @@ function createContactSection(metadata) {
   }
 
   return contactDiv
+}
+
+/**
+ * Creates the download section with PDF download link.
+ * This function generates a download button for the CV in PDF format.
+ *
+ * @returns {HTMLDivElement} A div element containing the download link
+ */
+function createDownloadSection() {
+  const downloadDiv = document.createElement('div')
+  downloadDiv.className = 'download-section'
+
+  const downloadLink = document.createElement('a')
+  downloadLink.href = '/cv.pdf'
+  downloadLink.className = 'download-link'
+  downloadLink.textContent = 'Download PDF'
+  downloadLink.target = '_blank'
+
+  downloadDiv.appendChild(downloadLink)
+  return downloadDiv
 }

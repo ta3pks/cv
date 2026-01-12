@@ -3,9 +3,6 @@ import { setTimeout } from 'node:timers/promises'
 import puppeteer from 'puppeteer'
 import { PDFDocument } from 'pdf-lib'
 import { createServer } from 'vite'
-import { format } from 'date-fns'
-
-const today = format(new Date(), 'yyyyMMdd-HHmmss')
 
 function slugify(text) {
   return text
@@ -52,7 +49,7 @@ function slugify(text) {
     return titleElement ? titleElement.textContent : 'CV'
   })
 
-  const pdfPath = `${slugify(author)}-resume-${today}.pdf`
+  const pdfPath = 'nikos-cv.pdf'
 
   await page.pdf({
     path: pdfPath,
