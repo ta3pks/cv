@@ -224,6 +224,66 @@ Designed and implemented an extensible APRS-IS (Automatic Packet Reporting Syste
 **Technologies:** Rust, Tokio, async-trait, serde, TOML, aprs-parser, callpass, lettre, twitter-v2, clap, parking_lot, thiserror, educe, tap, strum
 **Repository:** [github.com/ta3pks/aprs-agent](https://github.com/ta3pks/aprs-agent)
 
+### rust_helpers (Rust Utility Library)
+
+Developed a production-ready utility library providing ergonomic helpers, trait extensions, and macros to reduce boilerplate code and simplify common programming tasks in Rust.
+
+- Core Utility Modules
+
+  - **Time & Duration Utilities** (190 lines): Ergonomic time conversions (e.g., `5.seconds()`, `2.hours()`), SystemTime extensions for Unix timestamps (seconds/milliseconds/nanoseconds), duration-to-unix conversion for past/future timestamps, formatted duration output (`hms()`, `hmsxxx()`), and sync/async sleep utilities
+  - **Procedural Macros** (241 lines): Struct field inheritance macro (`extends!`), compile-time bitflag generation (`bit_variants!`), conditional expressions (`if_else!`), and match-like conditional statements with bound matching syntax
+  - **Numeric Type Casting** (210 lines): Type-safe casting between all 14 numeric types (u8-128, i8-128, usize, isize, f32, f64) with single `cast_as()` method, eliminating manual conversion boilerplate
+
+- Extension Traits
+
+  - **Iterator Extensions** (106 lines): Synchronous and async stream collectors for Vec, HashMap, and HashSet types, with parallel iterator support via rayon feature for high-performance collection operations
+  - **Debug & Display Printing** (100 lines): Message-tagged printing utilities (`println("Label")`, `eprintln("Error")`), debug-specific output with `_dbg` suffix variants, and pretty-print debug formatting for complex types
+  - **Encoding/Decoding**: Hexadecimal encoding/decoding (lower/upper case), Base64 encoding/decoding (optional feature), MD5 hashing with hex/base64 output formats (optional feature)
+  - **JSON Utilities** (optional feature): Serialization helpers using serde (`to_json()`, `to_json_string()`, `to_json_pretty_string()`) and deserialization (`parse_json::<Type>()`)
+  - **Result Extensions**: Automatic type conversion for Result types (`map_into()`, `map_err_into()`)
+  - **Sync Primitive Extensions**: Graceful handling of poisoned mutexes and rwlocks with `lock_ignore()`, `read_ignore()`, `write_ignore()` methods
+
+- Bitflag Generation
+
+  - Declarative macro `bit_variants!` generating compile-time bitflag constants (e.g., `FLAG_A = 1 << 0`, `FLAG_B = 1 << 1`)
+  - Type-safe flag manipulation with automatic shift calculations
+  - Supports any integer type as underlying storage
+
+- Feature-Gated Architecture
+
+  - **Default features**: async time, JSON, MD5, Base64 utilities
+  - **Optional features**: rayon (parallel iterators), time_async (tokio integration), base64 (encoding), md5 (hashing), json (serde integration)
+  - Minimal compilation footprint for projects requiring only core utilities
+  - Zero-cost abstractions with compile-time optimizations
+
+- Advanced Rust Features
+
+  - Generic trait implementations with macro-generated code for 14 numeric types
+  - Composable trait extensions enabling method chaining patterns
+  - Async/await integration with futures and tokio for time utilities
+  - Declarative procedural macros for compile-time code generation
+  - Feature flag system for modular dependency management
+
+- Testing & Documentation
+
+  - Embedded unit tests in each module with comprehensive coverage
+  - Inline Rust documentation with doc examples in trait definitions
+  - Well-structured module organization (~1,200 LOC across 12 modules)
+  - Versioned releases (current v2.12.0) with active maintenance
+
+**Key Achievements:**
+
+- Reduced boilerplate code in 50+ common Rust programming scenarios through ergonomic trait extensions
+- Designed composable, chainable APIs for data transformation (encoding, hashing, JSON)
+- Implemented type-safe numeric casting system eliminating manual conversion errors
+- Created feature-gated architecture enabling minimal dependency footprints for different use cases
+- Developed procedural macros for compile-time optimizations (bitflags, struct inheritance)
+- Built both synchronous and asynchronous iteration utilities with parallel processing support
+- Achieved zero-cost abstractions through careful trait design and generic implementations
+
+**Technologies:** Rust, futures, serde, serde_json, base64_light, md5, rayon, tokio, tap
+**Repository:** [github.com/ta3pks/rust_utilities](https://github.com/ta3pks/rust_utilities)
+
 ### Open Source Contributions
 
 - GitHub: [@ta3pks](https://github.com/ta3pks)
