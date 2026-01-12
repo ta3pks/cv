@@ -3,7 +3,8 @@ title: Nikos Efthias aka R.B. Tokdemir
 headline: Software Engineer
 description: Software Engineer with 10+ years of experience in systems programming, backend development, and distributed systems
 email: nikos@mugsoft.io
-phone: +995 500 057 048
+phone: |
+  +995 500 057 048
   +7 962 572 2002
 github: '@ta3pks'
 linked_in: https://www.linkedin.com/in/nikosefthias/
