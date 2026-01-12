@@ -3,7 +3,8 @@ title: Nikos Efthias aka R.B. Tokdemir
 headline: Software Engineer
 description: Software Engineer with 10+ years of experience in systems programming, backend development, and distributed systems
 email: nikos@mugsoft.io
-phone: +995 057 048 - +7 962 572 2002
+phone: +995 500 057 048
+  +7 962 572 2002
 github: '@ta3pks'
 linked_in: https://www.linkedin.com/in/nikosefthias/
 stackoverflow: https://stackoverflow.com/users/3553432/nikoss
@@ -189,7 +190,7 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 - Scaled systems to handle high-throughput event processing
 - Led technical strategy and development team
 
-### Founder [Jan 2018 – Present] | [MugSoft](https://mugsoft.io)
+### Founder [Jan 2018] | [MugSoft](https://mugsoft.io)
 
 - Founded independent software development consultancy
 - Delivered custom solutions in Rust, Go, and TypeScript
@@ -197,7 +198,7 @@ Designed and implemented a comprehensive social media monitoring and analysis pl
 - Built and maintained client-facing API services
 - Specialized in high-performance backend systems
 
-### Golang Developer [Jan 2017 – Present] | [socialgin.com](https://socialgin.com)
+### Golang Developer [Jan 2017] | [socialgin.com](https://socialgin.com)
 
 - Developed and maintained backend systems using Go
 - Built scalable API services and microservices

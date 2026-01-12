@@ -131,7 +131,12 @@ function createContactSection(metadata) {
 
   // Phone
   if (metadata.phone) {
-    contactDiv.appendChild(createContactItem('ph-phone', metadata.phone, `tel:${metadata.phone}`))
+    const phones = metadata.phone.split('\n').filter((p) => p.trim())
+    phones.forEach((phone) => {
+      contactDiv.appendChild(
+        createContactItem('ph-phone', phone.trim(), `tel:${phone.trim().replace(/\s+/g, '')}`)
+      )
+    })
   }
 
   // GitHub
