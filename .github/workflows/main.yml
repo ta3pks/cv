@@ -2,10 +2,10 @@ name: CI/CD
 
 on:
   push:
-    branches: [ main ]
-    tags: [ 'v*' ]
+    branches: [main]
+    tags: ['v*']
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,7 +18,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -129,6 +129,9 @@ jobs:
       - name: Generate PDF
         run: npm run pdf
 
+      - name: Copy PDF to dist
+        run: cp nikos-cv.pdf dist/cv.pdf
+
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
@@ -149,45 +152,45 @@ jobs:
         uses: actions/deploy-pages@v4
 
   release:
-      if: startsWith(github.ref, 'refs/tags/v')
-      needs: [build]
-      runs-on: ubuntu-24.04
-      permissions:
-        contents: write
-      outputs:
-        release_name: ${{ steps.release_info.outputs.release_name }}
-      steps:
-        - uses: actions/checkout@v4
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    outputs:
+      release_name: ${{ steps.release_info.outputs.release_name }}
+    steps:
+      - uses: actions/checkout@v4
 
-        - name: Install just
-          run: |
-            wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | \
-              gpg --dearmor | \
-              sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
-            echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | \
-              sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
-            sudo apt-get update
-            sudo apt-get install just -y --no-install-recommends
+      - name: Install just
+        run: |
+          wget -qO - 'https://proget.makedeb.org/debian-feeds/prebuilt-mpr.pub' | \
+            gpg --dearmor | \
+            sudo tee /usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg 1> /dev/null
+          echo "deb [arch=all,$(dpkg --print-architecture) signed-by=/usr/share/keyrings/prebuilt-mpr-archive-keyring.gpg] https://proget.makedeb.org prebuilt-mpr $(lsb_release -cs)" | \
+            sudo tee /etc/apt/sources.list.d/prebuilt-mpr.list
+          sudo apt-get update
+          sudo apt-get install just -y --no-install-recommends
 
-        - name: Generate release notes
-          run: just release-notes
+      - name: Generate release notes
+        run: just release-notes
 
-        - name: Set release info
-          id: release_info
-          run: |
-            TODAY="($(TZ=Africa/Lusaka date --iso))"
-            echo "release_name=${{ github.ref_name }} $TODAY" >> $GITHUB_OUTPUT
+      - name: Set release info
+        id: release_info
+        run: |
+          TODAY="($(TZ=Africa/Lusaka date --iso))"
+          echo "release_name=${{ github.ref_name }} $TODAY" >> $GITHUB_OUTPUT
 
-        - name: Download build artifacts
-          uses: actions/download-artifact@v4
-          with:
-            name: resume-pdf
-            path: artifacts
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: resume-pdf
+          path: artifacts
 
-        - name: Create GitHub Release
-          uses: softprops/action-gh-release@v1
-          with:
-            name: ${{ steps.release_info.outputs.release_name }}
-            body_path: ../LATEST_RELEASE_NOTES.md
-            files: |
-              artifacts/*.pdf
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.release_info.outputs.release_name }}
+          body_path: ../LATEST_RELEASE_NOTES.md
+          files: |
+            artifacts/*.pdf
